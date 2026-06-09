@@ -1,0 +1,182 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Check your answers – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "about-you"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <h1 class="govuk-heading-l">
+        Check your answers
+      </h1>
+
+      <h2 class="govuk-heading-m">
+        What you need
+      </h2>
+
+      {{ govukSummaryList({
+        classes: "govuk-!-margin-bottom-9",
+        rows: [
+          {
+            key: {
+              text: "Which service is your request for?"
+            },
+            value: {
+              text: data['which-service'] | getServiceLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: "what-you-need",
+                  text: "Change",
+                  visuallyHiddenText: "which service is your request for"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "What is your request about?"
+            },
+            value: {
+              text: data['request-about'] | getRequestAboutLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: "what-you-need",
+                  text: "Change",
+                  visuallyHiddenText: "what your request is about"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        About you
+      </h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Full name"
+            },
+            value: {
+              text: data.fullName
+            },
+            actions: {
+              items: [
+                {
+                  href: "about-you",
+                  text: "Change",
+                  visuallyHiddenText: "full name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Email address"
+            },
+            value: {
+              text: data.email
+            },
+            actions: {
+              items: [
+                {
+                  href: "about-you",
+                  text: "Change",
+                  visuallyHiddenText: "email address"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Request details"
+            },
+            value: {
+              html: (data['request-details'] or '') | e | replace('\n', '<br>')
+            },
+            actions: {
+              items: [
+                {
+                  href: "about-you",
+                  text: "Change",
+                  visuallyHiddenText: "request details"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Supporting documentation"
+            },
+            value: {
+              text: data['supporting-documentation'] or "No files uploaded"
+            },
+            actions: {
+              items: [
+                {
+                  href: "about-you",
+                  text: "Change",
+                  visuallyHiddenText: "supporting documentation"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Can we contact you if we need more information?"
+            },
+            value: {
+              text: data['contact-consent'] | getContactConsentLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: "about-you",
+                  text: "Change",
+                  visuallyHiddenText: "whether we can contact you"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        Now send your request
+      </h2>
+
+      <p class="govuk-body">
+        By submitting this request you are confirming that, to the best of your knowledge, the details you are providing are correct.
+      </p>
+
+      <form action="success" method="post" novalidate>
+
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Submit request"
+          }) }}
+
+          <a class="govuk-link" href="start-page">Cancel</a>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

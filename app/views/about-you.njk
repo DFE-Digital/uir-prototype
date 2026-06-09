@@ -1,0 +1,132 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  About you – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        About you
+      </h1>
+
+      <form class="form" action="check-answers" method="post">
+
+        {{ govukInput({
+          label: {
+            text: "Full name",
+            classes: "govuk-label--m"
+          },
+          id: "full-name",
+          name: "fullName",
+          value: data.fullName,
+          autocomplete: "name",
+          spellcheck: false
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Email address",
+            classes: "govuk-label--m"
+          },
+          hint: {
+            text: "We'll use this to send updates about your request"
+          },
+          id: "email",
+          name: "email",
+          type: "email",
+          value: data.email,
+          autocomplete: "email",
+          spellcheck: false
+        }) }}
+
+        {{ govukCharacterCount({
+          name: "request-details",
+          id: "request-details",
+          maxlength: 1000,
+          value: data['request-details'],
+          label: {
+            text: "Request details",
+            classes: "govuk-label--m"
+          },
+          hint: {
+            text: "Describe your request. Include what you were trying to do, what happened, and any other relevant information."
+          }
+        }) }}
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+        <h2 class="govuk-heading-m">
+          Supporting documentation
+        </h2>
+
+        {{ govukWarningText({
+          text: "Do not upload personal, sensitive or classified information unless you have been asked to. If your information includes any of these, you may be contacted to discuss alternative ways to share it more securely."
+        }) }}
+
+        <input type="hidden" name="supporting-documentation" id="supporting-documentation-summary" value="{{ data['supporting-documentation'] }}">
+
+        {{ govukFileUpload({
+          id: "supporting-documentation",
+          name: "supporting-documentation-files",
+          javascript: true,
+          multiple: true,
+          label: {
+            text: "Upload your documents",
+            classes: "govuk-label--m"
+          },
+          hint: {
+            text: "You can upload up to 20 files. This is optional. Accepted file types are PNG, JPG, PDF, DOCX and XLSX. Each file must be no larger than 25MB."
+          },
+          attributes: {
+            accept: ".png,.jpg,.jpeg,.pdf,.docx,.xlsx"
+          },
+          chooseFilesButtonText: "Choose files",
+          dropInstructionText: "or drop files"
+        }) }}
+
+        {{ govukRadios({
+          name: "contact-consent",
+          value: data['contact-consent'],
+          classes: "govuk-radios--inline",
+          fieldset: {
+            legend: {
+              text: "Can we contact you if we need more information?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "If you're happy to be contacted, we may use your personal information to do so."
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
