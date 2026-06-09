@@ -1,4 +1,3 @@
-# uir-prototype
 # Readme for the "Unified Intake and Routing Model prototype"
 UIR (Unified Intake and Routing Model prototype)
 Prototypes for iterations and additions to the UIR project.

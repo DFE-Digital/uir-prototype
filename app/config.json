@@ -1,0 +1,9 @@
+{
+  "serviceName": "Unified Intake and Routing Model",
+  "useServiceNavigation": true,
+  "plugins": {
+    "govuk-frontend": {
+      "rebrand": true
+    }
+  }
+}
