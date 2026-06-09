@@ -1,0 +1,109 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Tell us what you need – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Tell us what you need
+      </h1>
+
+      <form class="form" action="/path/of/next/page" method="post">
+
+        {{ govukSelect({
+          id: "which-service",
+          name: "which-service",
+          label: {
+            text: "Which service is your request for?",
+            classes: "govuk-label--m"
+          },
+          value: "fiats",
+          items: [
+            {
+              value: "fiats",
+              text: "Find Information about Schools and Trusts"
+            },
+            {
+              value: "manage-school-improvement",
+              text: "Manage School Improvement"
+            },
+            {
+              value: "prepare",
+              text: "Prepare"
+            },
+            {
+              value: "complete",
+              text: "Complete"
+            },
+            {
+              value: "recast",
+              text: "ReCast"
+            }
+          ]
+        }) }}
+
+        {{ govukRadios({
+          name: "request-about",
+          fieldset: {
+            legend: {
+              text: "What is your request about?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "report-a-problem",
+              text: "Report a problem",
+              hint: {
+                text: "Something isn't working as expected"
+              }
+            },
+            {
+              value: "suggest-a-change",
+              text: "Suggest a change",
+              hint: {
+                text: "An idea to improve a service or process"
+              }
+            },
+            {
+              value: "raise-a-risk",
+              text: "Raise a risk or compliance concern",
+              hint: {
+                text: "Report concerns about legal or regulatory requirements"
+              }
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "something-else",
+              text: "Something else",
+              hint: {
+                text: "I'm not sure which option to choose"
+              }
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
