@@ -7,13 +7,26 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
-
     <h1 class="govuk-heading-xl">
       {{ serviceName }}
     </h1>
 
-    {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %}
+    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
+
+    <h2 class="govuk-heading-l">
+      Start the prototype
+    </h2>
+
+    <p class="govuk-body">
+      This is a basic prototype following the teams wireframes to assist with the development of an MvP.
+    </p>
+
+    {{ govukButton({
+      text: "Start prototype",
+      href: "start-page",
+      isStartButton: true
+    }) }}
+
   </div>
 </div>
 
