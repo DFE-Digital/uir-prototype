@@ -31,10 +31,10 @@ Main content will be replaced in here.
 
   {% set getStartedHtml %}
     <p class="govuk-body govuk-!-margin-bottom-4">
-      Use this service to suggest an improvement or report a problem.
+      Tell us if something is broken or could be improved.
     </p>
     {{ govukButton({
-      text: "Create a request",
+      text: "Report a problem or give feedback",
       href: "what-you-need",
       classes: "govuk-button--secondary govuk-!-margin-bottom-2"
     }) }}
@@ -43,7 +43,7 @@ Main content will be replaced in here.
   {{ uirFooter({
     navigation: [
       {
-        title: "Submit a request",
+        title: "Problems and feedback",
         headingClasses: "govuk-heading-m",
         width: "one-half",
         html: getStartedHtml | trim
