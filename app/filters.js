@@ -7,11 +7,17 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 
 const serviceLabels = {
-  'fiats': 'Find Information about Schools and Trusts',
-  'manage-school-improvement': 'Manage School Improvement',
-  'prepare': 'Prepare',
-  'complete': 'Complete',
-  'recast': 'ReCast'
+  'reep': 'Record Engagement with Education Providers (REEP)',
+  'complete': 'Complete Conversions and Transfers (Complete)',
+  'eat': 'External Applications - Academy Transfers (EAT)',
+  'vcc': "Vulnerable Children's Casework (VCC)",
+  'fast': 'Find Information about Schools and Trusts (FAST)',
+  'mfsp': 'Manage Free School Projects (MFSP)',
+  'manage-school-improvement': 'Manage School Improvement (MSI)',
+  'prepare': 'Prepare Conversions and Transfers (Prepare)',
+  'recast': 'Record Concerns and Supports for Trusts (RECAST)',
+  'something-new': 'Something new',
+  'all-services': 'All services'
 }
 
 const requestAboutLabels = {
@@ -21,13 +27,29 @@ const requestAboutLabels = {
   'something-else': 'Something else'
 }
 
-const contactConsentLabels = {
+const yesNoLabels = {
   'yes': 'Yes',
   'no': 'No'
 }
 
+function getLabels (value, labels) {
+  if (Array.isArray(value)) {
+    return value.map((item) => labels[item] || item).filter(Boolean)
+  }
+  if (!value) {
+    return []
+  }
+  return [labels[value] || value]
+}
+
 addFilter('getServiceLabel', (value) => {
-  return serviceLabels[value] || value || ''
+  return getLabels(value, serviceLabels).join(', ')
+})
+
+addFilter('getServiceLabelHtml', (value) => {
+  return getLabels(value, serviceLabels)
+    .map((label) => label.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'))
+    .join('<br>')
 })
 
 addFilter('getRequestAboutLabel', (value) => {
@@ -35,5 +57,9 @@ addFilter('getRequestAboutLabel', (value) => {
 })
 
 addFilter('getContactConsentLabel', (value) => {
-  return contactConsentLabels[value] || value || ''
+  return yesNoLabels[value] || value || ''
+})
+
+addFilter('getAiLabel', (value) => {
+  return yesNoLabels[value] || value || ''
 })

@@ -1,0 +1,61 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  What is your request about? – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "what-you-need"
+  }) }}
+{% endblock %}
+
+{% set aiHTML %}
+  <p class="govuk-hint">This includes using AI to explore, create or enhance a tool, service or way of working to improve outcomes for education.</p>
+  <p class="govuk-hint">For example, "AI for Good".</p>
+{% endset %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" action="about-you" method="post">
+
+        {{ govukRadios({
+          name: "ai",
+          value: data['ai'],
+          classes: "govuk-radios--inline",
+          hint: {
+            html: aiHTML
+          },
+          fieldset: {
+            legend: {
+              text: "Is your request related to an AI initiative?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

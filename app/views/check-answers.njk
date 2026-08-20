@@ -31,7 +31,7 @@
               text: "Which service is your request for?"
             },
             value: {
-              text: data['which-service'] | getServiceLabel
+              html: data['which-service'] | getServiceLabelHtml
             },
             actions: {
               items: [
@@ -53,9 +53,26 @@
             actions: {
               items: [
                 {
-                  href: "what-you-need",
+                  href: "request-about",
                   text: "Change",
                   visuallyHiddenText: "what your request is about"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Is your request related to an AI initiative?"
+            },
+            value: {
+              text: data['ai'] | getAiLabel
+            },
+            actions: {
+              items: [
+                {
+                  href: "ai",
+                  text: "Change",
+                  visuallyHiddenText: "whether your request is related to an AI initiative"
                 }
               ]
             }
@@ -172,7 +189,7 @@
             text: "Submit request"
           }) }}
 
-          <a class="govuk-link" href="start-page">Cancel</a>
+          <a class="govuk-link" href="/">Cancel</a>
         </div>
 
       </form>

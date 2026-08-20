@@ -1,102 +1,91 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  Tell us what you need – {{ serviceName }} – GOV.UK Prototype Kit
+  Which service is your request for? – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
-{% block containerStart %}
+{# {% block containerStart %}
   {{ govukBackLink({
     text: "Back",
     href: "javascript:window.history.back()"
   }) }}
-{% endblock %}
+{% endblock %} #}
 
 {% block content %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        Tell us what you need
-      </h1>
+      <form class="form" action="request-about" method="post">
 
-      <form class="form" action="about-you" method="post">
-
-        {{ govukSelect({
-          id: "which-service",
+        {{ govukCheckboxes({
           name: "which-service",
-          label: {
-            text: "Which service is your request for?",
-            classes: "govuk-label--m"
-          },
-          value: data['which-service'] or "fiats",
-          items: [
-            {
-              value: "fiats",
-              text: "Find Information about Schools and Trusts"
-            },
-            {
-              value: "manage-school-improvement",
-              text: "Manage School Improvement"
-            },
-            {
-              value: "prepare",
-              text: "Prepare"
-            },
-            {
-              value: "complete",
-              text: "Complete"
-            },
-            {
-              value: "recast",
-              text: "ReCast"
-            }
-          ]
-        }) }}
-
-        {{ govukRadios({
-          name: "request-about",
-          value: data['request-about'],
           fieldset: {
             legend: {
-              text: "What is your request about?",
-              classes: "govuk-fieldset__legend--m"
+              text: "Which service is your request for?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
             }
           },
           hint: {
-            text: "Choose the option that best describes your request"
+            text: "Select one or more services that your request is for"
           },
           items: [
             {
-              value: "report-a-problem",
-              text: "Report a problem",
-              hint: {
-                text: "Something isn't working as expected"
-              }
+              value: "reep",
+              text: "Record Engagement with Education Providers (REEP)",
+              checked: checked("which-service", "reep")
             },
             {
-              value: "suggest-a-change",
-              text: "Suggest a change",
-              hint: {
-                text: "An idea to improve a service or process"
-              }
+              value: "complete",
+              text: "Complete Conversions and Transfers (Complete)",
+              checked: checked("which-service", "complete")
             },
             {
-              value: "raise-a-risk",
-              text: "Raise a risk or compliance concern",
-              hint: {
-                text: "Report concerns about legal or regulatory requirements"
-              }
+              value: "eat",
+              text: "External Applications - Academy Transfers (EAT)",
+              checked: checked("which-service", "eat")
+            },
+            {
+              value: "vcc",
+              text: "Vulnerable Children's Casework (VCC)",
+              checked: checked("which-service", "vcc")
+            },
+            {
+              value: "fast",
+              text: "Find Information about Schools and Trusts (FAST)",
+              checked: checked("which-service", "fast")
+            },
+            {
+              value: "mfsp",
+              text: "Manage Free School Projects (MFSP)",
+              checked: checked("which-service", "mfsp")
+            },
+            {
+              value: "manage-school-improvement",
+              text: "Manage School Improvement (MSI)",
+              checked: checked("which-service", "manage-school-improvement")
+            },
+            {
+              value: "prepare",
+              text: "Prepare Conversions and Transfers (Prepare)",
+              checked: checked("which-service", "prepare")
+            },
+            {
+              value: "recast",
+              text: "Record Concerns and Supports for Trusts (RECAST)",
+              checked: checked("which-service", "recast")
             },
             {
               divider: "or"
             },
             {
-              value: "something-else",
-              text: "Something else",
+              value: "something-new",
+              text: "Something new",
               hint: {
-                text: "I'm not sure which option to choose"
-              }
+                text: "None of the services above match your request"
+              },
+              checked: checked("which-service", "something-new")
             }
           ]
         }) }}
@@ -111,3 +100,12 @@
   </div>
 
 {% endblock %}
+
+{# {
+  value: "all-services",
+  text: "All services",
+  hint: {
+    text: "Your request relates to all or most of the services listed"
+  },
+  checked: checked("which-service", "all-services")
+}, #}
