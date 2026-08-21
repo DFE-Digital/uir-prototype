@@ -1,5 +1,5 @@
 {
-  "serviceName": "Unified Intake and Routing Model",
+  "serviceName": "Report a problem or give feedback",
   "useServiceNavigation": true,
   "plugins": {
     "govuk-frontend": {
